@@ -17,7 +17,9 @@ class Routes {
       default:
         return MaterialPageRoute(
           builder: (context) => const Scaffold(
-            body: Center(child: Text("No routes find")),
+            body: Center(
+              child: Text("No routes find"),
+            ),
           ),
         );
     }
