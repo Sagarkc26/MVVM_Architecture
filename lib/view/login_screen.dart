@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mvvm_architecture/res/color.dart';
 import 'package:mvvm_architecture/res/components/round_button.dart';
 import 'package:mvvm_architecture/utils/utils.dart';
+import 'package:mvvm_architecture/view_model/auth_view_model.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -11,23 +13,24 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+
+  FocusNode _emailfocus = FocusNode();
+  FocusNode _passwordfocus = FocusNode();
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    _emailfocus.dispose();
+    _passwordfocus.dispose();
+    // TODO: implement dispose
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    TextEditingController _emailController = TextEditingController();
-    TextEditingController _passwordController = TextEditingController();
-
-    FocusNode _emailfocus = FocusNode();
-    FocusNode _passwordfocus = FocusNode();
-    @override
-    void dispose() {
-      _emailController.dispose();
-      _passwordController.dispose();
-      _emailfocus.dispose();
-      _passwordfocus.dispose();
-      // TODO: implement dispose
-      super.dispose();
-    }
-
+    final authViewModel = Provider.of<AuthViewModel>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.appbarColor,
@@ -124,6 +127,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   Utils.flushErrorMessage(
                       "Password must hava 8 character", context);
                 } else {
+                  Map data = {
+                    "email": _emailController.text.toString(),
+                    'password': _passwordController.text.toString(),
+                  };
+                  authViewModel.loginApi(data, context);
                   print("Api hit");
                 }
               },
