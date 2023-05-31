@@ -4,6 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class Utils {
+  static void fieldFocusChange(
+      BuildContext context, FocusNode current, FocusNode nextfocus) {
+    current.unfocus();
+    FocusScope.of(context).requestFocus(nextfocus);
+  }
+
   static toastMessage(String message) {
     Fluttertoast.showToast(
       msg: message,
@@ -16,9 +22,15 @@ class Utils {
     showFlushbar(
       context: context,
       flushbar: Flushbar(
+        forwardAnimationCurve: Curves.decelerate,
+        margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+        padding: const EdgeInsets.all(15),
         message: message,
         backgroundColor: const Color.fromARGB(255, 165, 155, 155),
         duration: const Duration(seconds: 2),
+        flushbarPosition: FlushbarPosition.TOP,
+        reverseAnimationCurve: Curves.easeInOut,
+        positionOffset: 20,
       )..show(context),
     );
   }
