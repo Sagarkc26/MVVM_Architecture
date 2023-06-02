@@ -1,21 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:mvvm_architecture/res/color.dart';
 import 'package:mvvm_architecture/res/components/round_button.dart';
-import 'package:mvvm_architecture/utils/routes/routeName.dart';
 import 'package:mvvm_architecture/utils/utils.dart';
-import 'package:mvvm_architecture/view/homepage.dart';
 import 'package:mvvm_architecture/view_model/auth_view_model.dart';
 import 'package:provider/provider.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class SignUpView extends StatefulWidget {
+  const SignUpView({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignUpView> createState() => _SignUpViewState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignUpViewState extends State<SignUpView> {
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
 
@@ -37,7 +34,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.appbarColor,
-        title: const Text("Login"),
+        title: const Text("Signup"),
         centerTitle: true,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
@@ -135,21 +132,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     "email": _emailController.text.toString(),
                     'password': _passwordController.text.toString(),
                   };
-                  authViewModel.loginApi(data, context);
+                  authViewModel.singUpApi(data, context);
                   print("Api hit");
                 }
                 // Get.to(() => const HomePage(), transition: Transition.fade);
               },
-            ),
-            const SizedBox(
-              height: 25,
-            ),
-            InkWell(
-              onTap: () {
-                Navigator.pushNamed(context, RoutesName.signup);
-              },
-              child: const Text("Don't have an account,signup"),
-            ),
+            )
           ],
         ),
       ),
