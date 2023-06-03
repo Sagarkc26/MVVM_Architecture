@@ -3,6 +3,7 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:mvvm_architecture/routes.dart';
 import 'package:mvvm_architecture/utils/routes/routeName.dart';
 import 'package:mvvm_architecture/view_model/auth_view_model.dart';
+import 'package:mvvm_architecture/view_model/user_view_model.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -21,6 +22,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => AuthViewModel(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => UserViewModel(),
+        ),
       ],
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
@@ -28,7 +32,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        initialRoute: RoutesName.login,
+        initialRoute: RoutesName.splash,
         onGenerateRoute: Routes.generateRoute,
       ),
     );
